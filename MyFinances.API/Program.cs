@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MyFinances.Application.Services;
+using MyFinances.Application.Services.Interfaces;
 using MyFinances.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,11 @@ builder.Services.AddDbContext<MyFinancesDbContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<MyFinancesDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IBankAccountService, BankAccountService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<ICreditCardExpenseService, CreditCardExpenseService>();
+builder.Services.AddScoped<ICreditCardService, CreditCardService>();
 
 builder.Services.AddControllers();
 

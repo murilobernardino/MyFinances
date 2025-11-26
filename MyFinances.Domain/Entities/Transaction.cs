@@ -3,7 +3,7 @@ namespace MyFinances.Domain.Entities;
 public class Transaction
 {
     public int Id { get; set; }
-    public int bankAccountId { get; set; }
+    public int BankAccountId { get; set; }
     public virtual BankAccount BankAccount { get; set; } = null!;
     
     public decimal Amount { get; set; } = 0m;

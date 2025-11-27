@@ -28,7 +28,10 @@ public class CreditCardExpenseService : ICreditCardExpenseService
                 PurchaseDate = e.PurchaseDate,
                 Description = e.Description,
                 Installments = e.Installments,
-                CurrentInstallment = e.CurrentInstallment
+                CurrentInstallment = e.CurrentInstallment,
+                CategoryId = e.CategoryId,
+                BillMonth = e.BillMonth,
+                BillYear = e.BillYear
             })
             .ToListAsync();
     }
@@ -50,7 +53,10 @@ public class CreditCardExpenseService : ICreditCardExpenseService
             PurchaseDate = e.PurchaseDate,
             Description = e.Description,
             Installments = e.Installments,
-            CurrentInstallment = e.CurrentInstallment
+            CurrentInstallment = e.CurrentInstallment,
+            CategoryId = e.CategoryId,
+            BillMonth = e.BillMonth,
+            BillYear = e.BillYear
         };
     }
 
@@ -63,7 +69,10 @@ public class CreditCardExpenseService : ICreditCardExpenseService
             PurchaseDate = request.PurchaseDate,
             Description = request.Description,
             Installments = request.Installments,
-            CurrentInstallment = request.CurrentInstallment
+            CurrentInstallment = request.CurrentInstallment,
+            CategoryId = request.CategoryId,
+            BillMonth = request.BillMonth,
+            BillYear = request.BillYear
         };
         
         _context.CreditCardExpenses.Add(e);
@@ -78,7 +87,10 @@ public class CreditCardExpenseService : ICreditCardExpenseService
             PurchaseDate = e.PurchaseDate,
             Description = e.Description,
             Installments = e.Installments,
-            CurrentInstallment = e.CurrentInstallment
+            CurrentInstallment = e.CurrentInstallment,
+            CategoryId = e.CategoryId,
+            BillMonth = e.BillMonth,
+            BillYear = e.BillYear
         };
     }
 
@@ -93,6 +105,9 @@ public class CreditCardExpenseService : ICreditCardExpenseService
         entity.Description = request.Description;
         entity.Installments = request.Installments;
         entity.CurrentInstallment = request.CurrentInstallment;
+        entity.CategoryId = request.CategoryId;
+        entity.BillMonth = request.BillMonth;
+        entity.BillYear = request.BillYear;
         
         await _context.SaveChangesAsync();
         return true;

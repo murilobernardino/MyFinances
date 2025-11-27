@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyFinances.Data.Context;
 
@@ -11,9 +12,11 @@ using MyFinances.Data.Context;
 namespace MyFinances.Data.Migrations
 {
     [DbContext(typeof(MyFinancesDbContext))]
-    partial class MyFinancesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251127181855_AddCategoryRelationshipCreditCardExpense")]
+    partial class AddCategoryRelationshipCreditCardExpense
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -316,6 +319,9 @@ namespace MyFinances.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParenCategoryId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("ParentCategoryId")
                         .HasColumnType("int");

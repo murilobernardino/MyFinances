@@ -13,4 +13,10 @@ public class CreditCardExpense
     
     public int Installments { get; set; } = 1;
     public int CurrentInstallment { get; set; } = 1;
+    
+    public int CategoryId { get; set; }
+    public virtual Category Category { get; set; }
+    
+    public int BillMonth { get; set; }
+    public int BillYear { get; set; }
 }

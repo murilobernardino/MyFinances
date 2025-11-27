@@ -13,5 +13,11 @@ namespace MyFinances.Application.DTOs.Responses
 
         public int Installments { get; set; }
         public int CurrentInstallment { get; set; }
+        
+        public int CategoryId { get; set; }
+
+        public int BillMonth { get; set; }
+        public int BillYear { get; set; }
+
     }
 }

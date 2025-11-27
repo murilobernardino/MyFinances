@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyFinances.Data.Context;
 
@@ -11,9 +12,11 @@ using MyFinances.Data.Context;
 namespace MyFinances.Data.Migrations
 {
     [DbContext(typeof(MyFinancesDbContext))]
-    partial class MyFinancesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251127175523_AddCategoryAndAccountPayable")]
+    partial class AddCategoryAndAccountPayable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,6 +320,9 @@ namespace MyFinances.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ParenCategoryId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ParentCategoryId")
                         .HasColumnType("int");
 
@@ -376,9 +382,6 @@ namespace MyFinances.Data.Migrations
                     b.Property<int>("BillYear")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CreditCardId")
                         .HasColumnType("int");
 
@@ -396,8 +399,6 @@ namespace MyFinances.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("CreditCardId");
 
@@ -525,19 +526,11 @@ namespace MyFinances.Data.Migrations
 
             modelBuilder.Entity("MyFinances.Domain.Entities.CreditCardExpense", b =>
                 {
-                    b.HasOne("MyFinances.Domain.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MyFinances.Domain.Entities.CreditCard", "CreditCard")
                         .WithMany("Expenses")
                         .HasForeignKey("CreditCardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Category");
 
                     b.Navigation("CreditCard");
                 });

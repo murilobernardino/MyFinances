@@ -7,4 +7,6 @@ public class CategoryRequest
     public string? Description { get; set; }
     
     public int? ParentCategoryId { get; set; }
+    
+    public bool IsActive { get; set; } = true;
 }

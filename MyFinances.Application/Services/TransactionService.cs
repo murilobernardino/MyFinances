@@ -27,7 +27,11 @@ public class TransactionService : ITransactionService
                 Amount = t.Amount,
                 Date = t.Date,
                 Type = t.Type,
-                Description = t.Description
+                Nature = t.Nature,
+                Description = t.Description,
+                IsPaid = t.IsPaid,
+                PaymentDate = t.PaymentDate ?? DateTime.MinValue,
+                CategoryId = t.CategoryId
             })
             .ToListAsync();
     }
@@ -48,7 +52,11 @@ public class TransactionService : ITransactionService
             Amount = t.Amount,
             Date = t.Date,
             Type = t.Type,
-            Description = t.Description
+            Nature = t.Nature,
+            Description = t.Description,
+            IsPaid = t.IsPaid,
+            PaymentDate = t.PaymentDate ?? DateTime.MinValue,
+            CategoryId = t.CategoryId
         };
     }
 
@@ -60,7 +68,13 @@ public class TransactionService : ITransactionService
             Amount = request.Amount,
             Date = request.Date,
             Type = request.Type,
-            Description = request.Description
+            Nature = request.Nature,
+            Description = request.Description,
+            IsPaid = request.IsPaid,
+            PaymentDate = request.IsPaid && request.PaymentDate.HasValue 
+                ? request.PaymentDate 
+                : null,
+            CategoryId = request.CategoryId
         };
 
         _context.Transactions.Add(t);
@@ -74,7 +88,11 @@ public class TransactionService : ITransactionService
             Amount = t.Amount,
             Date = t.Date,
             Type = t.Type,
-            Description = t.Description
+            Nature = t.Nature,
+            Description = t.Description,
+            IsPaid = t.IsPaid,
+            PaymentDate = t.PaymentDate,
+            CategoryId = t.CategoryId
         };
     }
     
@@ -87,7 +105,11 @@ public class TransactionService : ITransactionService
         entity.Amount = request.Amount;
         entity.Date = request.Date;
         entity.Type = request.Type;
+        entity.Nature = request.Nature;
         entity.Description = request.Description;
+        entity.IsPaid = request.IsPaid;
+        entity.PaymentDate = request.IsPaid ? request.PaymentDate : null;
+        entity.CategoryId = request.CategoryId;
         
         await _context.SaveChangesAsync();
         return true;

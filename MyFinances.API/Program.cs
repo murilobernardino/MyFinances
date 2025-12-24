@@ -20,8 +20,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 
 builder.Services.AddScoped<IBankAccountService, BankAccountService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
-builder.Services.AddScoped<ICreditCardExpenseService, CreditCardExpenseService>();
 builder.Services.AddScoped<ICreditCardService, CreditCardService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddControllers();
 
@@ -35,6 +35,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 

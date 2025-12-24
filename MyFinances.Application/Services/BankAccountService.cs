@@ -1,9 +1,11 @@
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using MyFinances.Application.DTOs.Responses;
 using MyFinances.Application.DTOs.Requests;
 using MyFinances.Application.Services.Interfaces;
 using MyFinances.Data.Context;
 using MyFinances.Domain.Entities;
+using MyFinances.Domain.Enums;
 
 public class BankAccountService : IBankAccountService
 {
@@ -26,7 +28,7 @@ public class BankAccountService : IBankAccountService
                 InitialBalance = x.InitialBalance,
                 CurrentBalance = x.InitialBalance +
                     x.Transactions.Sum(t => 
-                        t.Type == TransactionType.Income ? t.Amount : -t.Amount
+                        t.Nature == TransactionNature.Income ? t.Amount : -t.Amount
                     )
             })
             .ToListAsync();
@@ -49,7 +51,7 @@ public class BankAccountService : IBankAccountService
             InitialBalance = entity.InitialBalance,
             CurrentBalance = entity.InitialBalance +
                 entity.Transactions.Sum(t => 
-                    t.Type == TransactionType.Income ? t.Amount : -t.Amount
+                    t.Nature == TransactionNature.Income ? t.Amount : -t.Amount
                 )
         };
     }

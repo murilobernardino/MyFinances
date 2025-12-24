@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyFinances.Application.DTOs.Requests;
 using MyFinances.Application.Services.Interfaces;
-using MyFinances.Application.DTOs.Responses;
 
 namespace MyFinances.API.Controllers;
 
@@ -32,7 +31,7 @@ public class TransactionsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, TransactionRequest request)
+    public async Task<IActionResult> Put(int id, [FromBody] TransactionRequest request)
     {
         var updated = await _service.UpdateAsync(id, request);
 
@@ -40,12 +39,12 @@ public class TransactionsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(TransactionRequest request)
+    public async Task<IActionResult> Create([FromBody] TransactionRequest request)
     {
         var created = await _service.CreateAsync(request);
         return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
     }
-    
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

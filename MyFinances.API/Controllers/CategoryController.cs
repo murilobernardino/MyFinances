@@ -6,22 +6,22 @@ namespace MyFinances.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CreditCardExpenseController : ControllerBase
+public class CategoryController : ControllerBase
 {
-    private readonly ICreditCardExpenseService _service;
+    private readonly ICategoryService _service;
     
-    public CreditCardExpenseController(ICreditCardExpenseService service)
+    public CategoryController(ICategoryService service)
     {
         _service = service;
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var result = await _service.GetAllAsync();
+        var result = await _service.GetAllASync();
         return Ok(result);
     }
-    
+
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
@@ -30,14 +30,14 @@ public class CreditCardExpenseController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreditCardExpenseRequest request)
+    public async Task<IActionResult> Create(CategoryRequest request)
     {
         var created = await _service.CreateAsync(request);
         return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
     }
-    
+
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, CreditCardExpenseRequest request)
+    public async Task<IActionResult> Put(int id, CategoryRequest request)
     {
         var updated = await _service.UpdateAsync(id, request);
         return updated ? NoContent() : NotFound();
